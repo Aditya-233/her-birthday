@@ -1,0 +1,777 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #2C1810, #5D4E75, #B85450);
+  color: #F5F5F5;
+  text-align: center;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.password-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.password-container {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  padding: 50px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+}
+
+.password-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #FFE4E6;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.password-subtitle {
+  font-size: 1.1em;
+  margin-bottom: 30px;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#passwordInput {
+  padding: 15px;
+  border: none;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1.1em;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+#passwordInput::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#passwordInput:focus {
+  outline: none;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+#submitPassword {
+  background: linear-gradient(45deg, #E91E63, #F06292);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+}
+
+#submitPassword:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(233, 30, 99, 0.5);
+}
+
+.password-error {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(231, 76, 60, 0.2);
+  border: 1px solid #e74c3c;
+  border-radius: 15px;
+  color: #fff;
+  font-weight: 600;
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.container {
+  padding: 40px;
+  position: relative;
+}
+
+.title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3em;
+  margin-top: 50px;
+  color: #FFB6C1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  animation: fadeIn 2s ease-in-out;
+}
+
+.subtitle {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 3s ease-in-out;
+  transition: opacity 0.5s ease;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+button {
+  background: linear-gradient(45deg, #E91E63, #F06292);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 8px 25px rgba(233, 30, 99, 0.5);
+}
+
+.secondary-btn {
+  background: linear-gradient(45deg, #fbc2eb, #a1c4fd);
+  margin-top: 20px;
+}
+
+.balloons, .floating-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.balloon {
+  position: absolute;
+  bottom: -150px;
+  background: radial-gradient(circle at 30% 30%, #fff, var(--color));
+  border-radius: 50%;
+  width: var(--size);
+  height: var(--size);
+  animation: floatUp var(--duration) linear infinite;
+}
+
+.floating-heart {
+  position: absolute;
+  font-size: 20px;
+  animation: floatHeart 6s linear infinite;
+  opacity: 0.8;
+}
+
+.game-mode .floating-hearts,
+.game-mode .balloons {
+  display: none !important;
+}
+
+.game-mode::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.diary-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.diary-book {
+  position: relative;
+  width: 90vw;
+  max-width: 800px;
+  height: 85vh;
+  max-height: 600px;
+  background: linear-gradient(45deg, #f4e4bc, #f7f0d7);
+  border-radius: 15px;
+  box-shadow:
+    0 0 30px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 3px #8b4513,
+    inset 0 0 0 6px #daa520;
+  overflow: hidden;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.close-diary-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(139, 69, 19, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  text-align: center;
+}
+
+.close-diary-btn:hover {
+  background: rgba(139, 69, 19, 1);
+  transform: scale(1.1);
+}
+
+.diary-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 0.5s ease;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diary-page.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cover-page {
+  background: linear-gradient(45deg, #8B0000, #DC143C, #FF69B4);
+  color: white;
+}
+
+.cover-content {
+  text-align: center;
+}
+
+.diary-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3.5em;
+  margin-bottom: 20px;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.diary-subtitle {
+  font-size: 1.5em;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.heart-decoration {
+  font-size: 4em;
+  margin: 30px 0;
+  animation: pulse 2s infinite;
+}
+
+.start-text {
+  font-size: 1.2em;
+  margin-top: 40px;
+  opacity: 0.8;
+  animation: blink 2s infinite;
+}
+
+.letter-page {
+  background: linear-gradient(135deg, #f4e4bc, #f7f0d7);
+  color: #2C1810;
+}
+
+.page-content {
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  position: relative;
+  overflow-y: auto;
+}
+
+.page-number {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 0.9em;
+  color: #8B4513;
+  font-weight: bold;
+}
+
+.letter-date {
+  font-size: 1.3em;
+  color: #8B0000;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.letter-text {
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: #2C1810;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+  text-shadow: 1px 1px 2px rgba(139, 69, 19, 0.1);
+}
+
+.navigation-hints {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.nav-hint {
+  background: rgba(139, 69, 19, 0.8);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.nav-hint:hover {
+  opacity: 1;
+}
+
+.left-hint {
+  visibility: hidden;
+}
+
+.diary-page:not(.cover-page).active ~ .navigation-hints .left-hint {
+  visibility: visible;
+}
+
+#heartGame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #2C1810, #5D4E75, #B85450);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.game-instructions {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.instructions-content ul {
+  text-align: left;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.instructions-content li {
+  margin: 15px 0;
+  font-size: 1.1em;
+}
+
+.good-hearts {
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+.bad-hearts {
+  color: #f44336;
+  font-weight: bold;
+}
+
+.start-game-btn {
+  background: linear-gradient(45deg, #4CAF50, #8BC34A);
+  font-size: 1.2em;
+  padding: 20px 40px;
+  margin-top: 20px;
+}
+
+#gamePlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin-bottom: 10px;
+}
+
+.game-header h2 {
+  margin: 0;
+  font-size: 1.8em;
+}
+
+.game-stats {
+  display: flex;
+  gap: 30px;
+}
+
+.score-display, .timer-display {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.game-area {
+  flex: 1;
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  margin: 0 20px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  min-height: 300px;
+  max-height: 60vh;
+}
+
+.game-heart {
+  position: absolute;
+  font-size: 35px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.1s ease;
+  z-index: 10;
+}
+
+.game-heart:hover {
+  transform: scale(1.2);
+}
+
+.game-heart.good-heart {
+  animation: fallDown var(--duration) linear;
+}
+
+.game-heart.bad-heart {
+  animation: fallUp var(--duration) linear;
+}
+
+.game-legend {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 15px;
+  margin-top: 10px;
+}
+
+.legend-item {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 15px;
+  border-radius: 15px;
+  font-size: 0.9em;
+}
+
+.legend-item.good {
+  border: 2px solid #4CAF50;
+}
+
+.legend-item.bad {
+  border: 2px solid #f44336;
+}
+
+.game-results {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(15px);
+  padding: 40px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 90vw;
+  text-align: center;
+}
+
+.final-score {
+  font-size: 2em;
+  margin: 20px 0;
+  color: #FFB6C1;
+}
+
+.score-message {
+  font-size: 1.2em;
+  margin: 20px 0;
+  color: #FFFFFF;
+}
+
+.play-again-btn {
+  background: linear-gradient(45deg, #9C27B0, #E91E63);
+  font-size: 1.1em;
+  padding: 15px 30px;
+  margin-top: 20px;
+}
+
+.close-game-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-game-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.letter-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.letter-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+body.diary-open {
+  overflow: hidden;
+}
+
+.firework {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 0.8; }
+  25%, 75% { opacity: 0.3; }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-120vh) rotate(360deg); }
+}
+
+@keyframes floatHeart {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes fallDown {
+  from { top: -50px; }
+  to { top: 100%; }
+}
+
+@keyframes fallUp {
+  from { top: 100%; }
+  to { top: -50px; }
+}
+
+@keyframes explode {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(20); }
+}
+
+@keyframes pop {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+.popping {
+  animation: pop 0.3s ease-out forwards;
+}
+
+@keyframes scoreFloat {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-50px) scale(1.5); opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2em;
+  }
+
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .game-header {
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+
+  .game-header h2 {
+    font-size: 1.5em;
+  }
+
+  .game-stats {
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .game-legend {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .game-area {
+    margin: 0 10px;
+    max-height: 50vh;
+  }
+
+  #heartGame {
+    padding: 10px;
+  }
+
+  .password-container {
+    padding: 30px;
+  }
+
+  .password-title {
+    font-size: 2em;
+  }
+
+  .diary-book {
+    width: 95vw;
+    height: 90vh;
+  }
+
+  .diary-page {
+    padding: 20px;
+  }
+
+  .diary-title {
+    font-size: 2.5em;
+  }
+
+  .letter-text {
+    font-size: 1em;
+  }
+
+  .navigation-hints {
+    padding: 0 20px;
+  }
+
+  .nav-hint {
+    font-size: 0.8em;
+    padding: 6px 12px;
+  }
+}
+
+#footerbruh {
+    color: black;
+}

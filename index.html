@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Subha</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="letterOverlay" class="letter-overlay"></div>
+
+  <div id="passwordScreen" class="password-screen">
+    <div class="password-container">
+      <h1 class="password-title">🔐 Access Required</h1>
+      <p class="password-subtitle">Enter the secret password, my love ❤️</p>
+      <div class="password-form">
+        <input type="password" id="passwordInput" placeholder="Enter password...">
+        <button id="submitPassword">Enter 💕</button>
+      </div>
+      <div id="passwordError" class="password-error hidden">You are not my wifeyy!! 😤</div>
+    </div>
+  </div>
+
+  <div id="mainContent" class="hidden">
+    <div class="container">
+      <div class="balloons"></div>
+      <div class="floating-hearts"></div>
+
+      <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+      </audio>
+
+      <h1 class="title">Happy Birthday Sweetheart</h1>
+      <p class="subtitle">You are everything I wanted in my life!!</p>
+
+      <div class="button-container">
+        <button id="musicBtn">Play Our Song 🎵</button>
+        <button id="loveNotesBtn">Love Letters 💌</button>
+        <button id="gameBtn">Play Heart Game 🎮</button>
+      </div>
+
+      <div id="loveDiary" class="diary-container hidden">
+        <div class="diary-book">
+          <button class="close-diary-btn" onclick="closeDiary()">✕</button>
+
+          <div class="diary-page cover-page active">
+            <div class="cover-content">
+              <h1 class="diary-title">Love Letters</h1>
+              <p class="diary-subtitle">For My Beautiful Wifeyy</p>
+              <div class="heart-decoration">💖</div>
+              <p class="start-text">Click right to begin reading →</p>
+            </div>
+          </div>
+
+          <div class="diary-page letter-page">
+            <div class="page-content">
+              <div class="page-number">Page 1</div>
+              <div class="letter-date">💌 First Love Letter</div>
+              <div class="letter-text">
+                My Dearest Subha,<br><br>
+                I still remeber the day when I first saw you, those eyes, your heavenly smile it was just perfect. I never knew someone like you existed on this earth<br><br>
+                Forever yours,<br>
+                Yours Adi
+              </div>
+            </div>
+          </div>
+
+          <div class="diary-page letter-page">
+            <div class="page-content">
+              <div class="page-number">Page 2</div>
+              <div class="letter-date">💕 Second Love Letter</div>
+              <div class="letter-text">
+                My Beautiful Sweety,<br><br>
+                When I proposed you my mouth went numb, my heart stopped waiting for your response. The night on aniticipation was the longest night of my life (next will be our's honeymoon!!)<br><br>
+                With all my love,<br>
+                Yours Huge Heavypie
+              </div>
+            </div>
+          </div>
+
+          <div class="diary-page letter-page">
+            <div class="page-content">
+              <div class="page-number">Page 3</div>
+              <div class="letter-date">🌹 Third Love Letter</div>
+              <div class="letter-text">
+                My Sweet Richa,<br><br>
+                I will never forget the days when we used to shy from holding our hands. Always removing your hand from mine on your cycle break was the best memories I have.<br><br>
+                Always yours,<br>
+                Your Raksash
+              </div>
+            </div>
+          </div>
+
+          <div class="diary-page letter-page">
+            <div class="page-content">
+              <div class="page-number">Page 4</div>
+              <div class="letter-date">💘 Fourth Love Letter</div>
+              <div class="letter-text">
+                My Small Princess,<br><br>
+                Never had I thought that our kiss will be infront of yours siblings but turns out it was the dream kiss I was looking for. Your reaction, smile, eyes everything made the scene even more romantic!!<br><br>
+                Eternally devoted,<br>
+                Your Alajuka
+              </div>
+            </div>
+          </div>
+
+          <div class="diary-page letter-page">
+            <div class="page-content">
+              <div class="page-number">Page 5</div>
+              <div class="letter-date">👑 Fifth Love Letter</div>
+              <div class="letter-text">
+                My Cute Love,<br><br>
+                I still remember when we explored each other, did all things known to humanity without a care in this world. My body still needs your touch and always want to yours.<br><br>
+                Happy Birthday!<br>
+                Your Huby
+              </div>
+            </div>
+          </div>
+
+          <div class="navigation-hints">
+            <div class="nav-hint left-hint">← Click here to go back</div>
+            <div class="nav-hint right-hint">Click here to continue →</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fireworks"></div>
+    </div>
+  </div>
+
+  <div id="heartGame" class="hidden">
+    <button class="close-game-btn" onclick="closeHeartGame()">✕</button>
+
+    <div id="gameInstructions" class="game-instructions">
+      <h2>Collect My Love Game</h2>
+      <div class="instructions-content">
+        <p><strong>How to Play:</strong></p>
+        <ul>
+          <li>Click hearts falling from <span class="good-hearts">TOP to BOTTOM</span> = +1 point</li>
+          <li>Avoid clicking hearts going <span class="bad-hearts">BOTTOM to TOP</span> = -1 point</li>
+          <li>Get the highest score in 30 seconds!</li>
+        </ul>
+        <button id="startGameBtn" class="start-game-btn">Start Game!</button>
+      </div>
+    </div>
+
+    <div id="gamePlay" class="hidden">
+      <div class="game-header">
+        <h2>Collect My Love</h2>
+        <div class="game-stats">
+          <span class="score-display">Score: <span id="score">0</span></span>
+          <span class="timer-display">Time: <span id="gameTimer">30</span>s</span>
+        </div>
+      </div>
+      <div class="game-area" id="gameArea"></div>
+      <div class="game-legend">
+        <span class="legend-item good">💕 Good Hearts (↓) = +1</span>
+        <span class="legend-item bad">💔 Bad Hearts (↑) = -1</span>
+      </div>
+    </div>
+
+    <div id="gameResults" class="hidden game-results">
+      <h2>Game Over!</h2>
+      <p class="final-score">Your Final Score: <span id="finalScore">0</span></p>
+      <p class="score-message" id="scoreMessage"></p>
+      <button id="playAgainBtn" class="play-again-btn">Play Again</button>
+    </div>
+  </div>
+
+  <br><br><br><br><br><br><br><br><br><br><br><br>
+  <footer id="footerbruh">
+    <p>I wanted to add pictures of yours but it seemed risky.. Sorry Wifeyy!!</p>
+    <p>Made with Love by Adi 2025</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
