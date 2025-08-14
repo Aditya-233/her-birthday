@@ -250,7 +250,7 @@ function spawnRandomHeart() {
     const gameArea = document.getElementById('gameArea');
     const heart = document.createElement('div');
 
-    const isGoodHeart = Math.random() > 0.6;
+    const isGoodHeart = Math.random() >= 0.5;
 
     heart.classList.add('game-heart');
     heart.textContent = isGoodHeart ? '💕' : '💔';
